@@ -1,17 +1,15 @@
 package org.timowa.recipemanager.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.timowa.recipemanager.database.entity.Ingredient;
 
 import java.util.*;
 
 @Component
+@RequiredArgsConstructor
 public class ConsoleManager {
     private final Scanner scanner;
-
-    public ConsoleManager() {
-        this.scanner = new Scanner(System.in);
-    }
 
     public void displayMessage(String message) {
         System.out.println(message);
@@ -63,7 +61,7 @@ public class ConsoleManager {
     public Set<Ingredient> readIngredientInput(String message) {
         System.out.println(message);
         Set<Ingredient> set = new HashSet<>();
-        List<String> whitelist = List.of("грамм", "милиграмм", "литр", "милилитр");
+        List<String> whitelist = List.of("грам", "милиграмм", "литр", "милилитр", "штук");
         int numberOfIngredient = 1;
 
         while (true) {
