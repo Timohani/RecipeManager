@@ -28,14 +28,15 @@ public class ConsoleManager {
                 ================
                 """);
 
-        return readIntInput();
+        return readIntInput("");
     }
 
-    public int readIntInput() {
+    public int readIntInput(String message) {
         while (true) {
             try {
+                System.out.println(message);
                 return Integer.parseInt(scanner.nextLine());
-            } catch (InputMismatchException e) {
+            } catch (NumberFormatException e) {
                 System.out.println("Неверный ввод, попробуйте ввести целое число: ");
                 scanner.nextLine();
             }
@@ -67,12 +68,11 @@ public class ConsoleManager {
 
         while (true) {
             System.out.printf("Ингредиент #%d\n".formatted(numberOfIngredient));
-            System.out.println("Название");
-            String name = scanner.nextLine();
-            System.out.println("Количество");
-            Integer count = Integer.parseInt(scanner.nextLine());
-            System.out.println("Единица измерения");
-            String unit = scanner.nextLine();
+
+            String name = readStringInput("Название");
+            Integer count = readIntInput("Количество");
+            String unit = readStringInput("Единица измерения");
+
             if (whitelist.contains(unit)) {
                 set.add(Ingredient.builder()
                         .name(name.toLowerCase())
@@ -83,8 +83,7 @@ public class ConsoleManager {
                 System.out.printf("Неверный аргумент '%s', повторите попытку сначала\n".formatted(unit));
                 continue;
             }
-            System.out.println("Продолжить? (Д/Н)");
-            String isAddIngredient = scanner.nextLine();
+            String isAddIngredient = readStringInput("Продолжить? (Д/Н)");
             if (isAddIngredient.equals("Д") || isAddIngredient.equals("Н")) {
                 if (isAddIngredient.equals("Н")) {
                     break;
