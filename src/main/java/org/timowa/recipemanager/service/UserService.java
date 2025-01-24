@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.timowa.recipemanager.controller.ConsoleManager;
 import org.timowa.recipemanager.database.entity.Ingredient;
 import org.timowa.recipemanager.database.entity.Recipe;
@@ -17,6 +18,7 @@ import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 @Getter
 @Setter
 public class UserService {

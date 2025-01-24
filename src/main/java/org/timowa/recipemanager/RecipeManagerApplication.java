@@ -15,8 +15,8 @@ public class RecipeManagerApplication {
         RecipeService recipeService = applicationContext.getBean(RecipeService.class);
         UserService userService = applicationContext.getBean(UserService.class);
 
-        System.out.println(userService.getCurrentUser().getRole());
         userService.initUser();
+        System.out.println(userService.getCurrentUser().getRole());
 
         recipeService.menu();
 

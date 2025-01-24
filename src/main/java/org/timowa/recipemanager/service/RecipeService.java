@@ -3,12 +3,10 @@ package org.timowa.recipemanager.service;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.timowa.recipemanager.controller.ConsoleManager;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 @Getter
 public class RecipeService {
     private final ConsoleManager consoleManager;
@@ -21,6 +19,7 @@ public class RecipeService {
             switch (menuResult) {
                 case 1:
                     userService.addRecipe();
+                    break;
                 default:
                     consoleManager.displayMessage("Неизвесный аргумент, повторите попытку");
             }
