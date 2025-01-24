@@ -36,4 +36,10 @@ public class Recipe {
     @ToString.Exclude
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Rating> ratings = new LinkedHashSet<>();
+
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
 }

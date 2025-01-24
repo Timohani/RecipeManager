@@ -6,15 +6,10 @@ import lombok.Setter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.timowa.recipemanager.controller.ConsoleManager;
-import org.timowa.recipemanager.database.entity.Ingredient;
-import org.timowa.recipemanager.database.entity.Recipe;
 import org.timowa.recipemanager.database.entity.User;
-import org.timowa.recipemanager.database.repository.RecipeRepository;
 import org.timowa.recipemanager.database.repository.UserRepository;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -23,7 +18,7 @@ import java.util.Set;
 @Setter
 public class UserService {
     private final UserRepository userRepository;
-    private final RecipeRepository recipeRepository;
+    private final RecipeService recipeService;
     private final ConsoleManager consoleManager;
     private User currentUser;
 
@@ -38,25 +33,21 @@ public class UserService {
         }
     }
 
-    public void addRecipe() {
-        String name = consoleManager.readStringInput("Введите уникальное название рецепта:");
-        String description = consoleManager.readStringInput("Введите описание рецепта:");
-        Set<Ingredient> ingredients = consoleManager.readIngredientInput("Введите ингредиенты рецепта: ");
-        List<String> steps = consoleManager.readListInput("Введите шаги приготовления рецепта:" +
-                "\n(По окончанию введите q)");
+    public void menu() {
+        while (true) {
+            int menuResult = consoleManager.menu();
+            if (menuResult == 0) break;
+            switch (menuResult) {
+                case 1:
+                    recipeService.addRecipe(currentUser);
+                    break;
+                case 2:
+                    recipeService.getRecipes();
+                    break;
+                default:
+                    consoleManager.displayMessage("Неизвесный аргумент, повторите попытку");
+            }
 
-        Recipe recipe = Recipe.builder()
-                .name(name)
-                .description(description)
-                .steps(steps)
-                .ingredients(ingredients)
-                .build();
-
-        User user = currentUser;
-
-        userRepository.save(user);
-
-        recipeRepository.save(recipe);
-        consoleManager.displayMessage("\nРецепт успешно создан!");
+        }
     }
 }

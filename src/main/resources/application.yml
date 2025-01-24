@@ -10,4 +10,4 @@ spring:
   jpa:
     hibernate:
       # For test
-      ddl-auto: create
+      ddl-auto: update

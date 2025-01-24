@@ -18,7 +18,7 @@ public class RecipeManagerApplication {
         userService.initUser();
         System.out.println(userService.getCurrentUser().getRole());
 
-        recipeService.menu();
+        userService.menu();
 
         recipeService.getConsoleManager().closeScanner();
     }
