@@ -30,16 +30,26 @@ public class Recipe {
     private List<String> steps = new ArrayList<>();
 
     @ToString.Exclude
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<Ingredient> ingredients = new LinkedHashSet<>();
 
     @ToString.Exclude
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany
     private Set<Rating> ratings = new LinkedHashSet<>();
 
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    public double getAvgRating() {
+        int count = 0;
+        int sum = 0;
+        for (Rating rating : ratings) {
+            sum += rating.getRate();
+            count++;
+        }
+        return (double) sum /count;
+    }
 
 }
