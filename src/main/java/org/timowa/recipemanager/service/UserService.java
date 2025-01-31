@@ -42,7 +42,7 @@ public class UserService {
                     recipeService.addRecipe(currentUser);
                     break;
                 case 2:
-                    recipeService.getRecipes();
+                    recipeService.getRecipes(currentUser);
                     break;
                 default:
                     consoleManager.displayMessage("Неизвесный аргумент, повторите попытку");

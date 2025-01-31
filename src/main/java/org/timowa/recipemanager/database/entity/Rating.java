@@ -20,7 +20,7 @@ public class Rating {
 
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", unique = true)
     private User user;
 
     @ToString.Exclude
