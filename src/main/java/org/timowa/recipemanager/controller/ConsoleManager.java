@@ -35,7 +35,6 @@ public class ConsoleManager {
                 return Integer.parseInt(scanner.nextLine());
             } catch (NumberFormatException e) {
                 System.out.println("Неверный ввод, попробуйте ввести целое число: ");
-                scanner.nextLine();
             }
         }
     }
