@@ -26,4 +26,8 @@ public class Ingredient {
     // Unit of measurement, like gram or liter
     @Column(length = 128, nullable = false)
     private String unit;
+
+    @ManyToOne
+    @JoinColumn(name = "recipe_id")
+    private Recipe recipe;
 }
